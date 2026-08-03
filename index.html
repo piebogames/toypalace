@@ -190,21 +190,26 @@
             flex-direction: column;
         }
 
-        .produto-frame-container {
+        /* --- NOVO ESTILO PARA IMAGENS LOCAIS --- */
+        .produto-image-container {
             width: 100%;
             height: 140px;
             background-color: #000;
             border: 2px inset #fff;
             overflow: hidden;
             margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .produto-frame-container iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            pointer-events: none;
+        .produto-retro-img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            image-rendering: pixelated; /* Mantém o aspecto digital de 2002 */
         }
+        /* --------------------------------------- */
 
         .no-photo-box {
             width: 100%;
@@ -461,8 +466,8 @@
                 <div class="grid-produtos">
                     
                     <div class="produto-card">
-                        <div class="produto-frame-container">
-                            <iframe src="https://drive.google.com/file/d/19ubrLicvsaEEb93yISrYc6caDSUReWm_/preview"></iframe>
+                        <div class="produto-image-container">
+                            <img src="PsooPlushie.png" alt="Psoo Plushie" class="produto-retro-img">
                         </div>
                         <div class="produto-info">
                             <div class="produto-nome">Psoo Plushie</div>
@@ -474,8 +479,8 @@
                     </div>
 
                     <div class="produto-card">
-                        <div class="produto-frame-container">
-                            <iframe src="https://drive.google.com/file/d/12_HVY35i8hCb25XG9NZPHr_uWILZpAie/preview"></iframe>
+                        <div class="produto-image-container">
+                            <img src="PenguinDoug.png" alt="Doug Plushie" class="produto-retro-img">
                         </div>
                         <div class="produto-info">
                             <div class="produto-nome">Doug Plushie</div>
@@ -500,8 +505,8 @@
                     </div>
 
                     <div class="produto-card">
-                        <div class="produto-frame-container">
-                            <iframe src="https://drive.google.com/file/d/1ck0b7osTFHk3niopJfv7zvV-3w1OCuyP/preview"></iframe>
+                        <div class="produto-image-container">
+                            <img src="DoctorMender.png" alt="Little Doctor Mender" class="produto-retro-img">
                         </div>
                         <div class="produto-info">
                             <div class="produto-nome">Little Doctor Mender</div>
