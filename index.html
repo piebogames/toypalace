@@ -3,1567 +3,324 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TOY PALACE</title>
-
+<title>Toy Palace - Welcome!</title>
 <style>
-* {
-    box-sizing: border-box;
-}
-
-html,
-body {
-    margin: 0;
-    padding: 0;
-    min-height: 100%;
-}
-
-body {
-    background-color: #008080;
-    color: #000;
-    font-family: "Courier New", Courier, monospace;
-    font-size: 14px;
-    padding: 10px;
-}
-
-input,
-textarea {
-    -webkit-user-select: text;
-    user-select: text;
-}
-
-.retro-container {
-    width: 100%;
-    margin: 0 auto;
-    background-color: #ffffff;
-    border: 3px outset #ffffff;
-    padding: 15px;
-    box-shadow: 5px 5px 0 #000000;
-    transition: max-width 0.3s ease;
-}
-
-.mode-computer {
-    max-width: 800px;
-}
-
-.mode-mobile {
-    max-width: 420px;
-    padding: 8px;
-}
-
-#device-modal {
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.6);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 5000;
-}
-
-.modal-box {
-    background: #c0c0c0;
-    border: 3px outset #ffffff;
-    width: 90%;
-    max-width: 380px;
-    box-shadow: 4px 4px 0 #000000;
-}
-
-.modal-titlebar {
-    background: #000080;
-    color: #ffffff;
-    font-weight: bold;
-    padding: 4px 8px;
-    font-size: 0.9rem;
-}
-
-.modal-content {
-    padding: 20px;
-    text-align: center;
-    font-size: 0.95rem;
-}
-
-.modal-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 15px;
-}
-
-.modal-btn {
-    background: #c0c0c0;
-    border: 2px outset #ffffff;
-    padding: 6px 15px;
-    font-family: "Courier New", Courier, monospace;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.modal-btn:active {
-    border-style: inset;
-}
-
-header {
-    background-color: #000080;
-    color: #ffffff;
-    padding: 10px;
-    text-align: center;
-    border: 2px inset #ffffff;
-    margin-bottom: 10px;
-}
-
-.logo {
-    font-size: 1.3rem;
-    font-weight: bold;
-    color: #ffff00;
-    text-decoration: none;
-}
-
-.search-area {
-    background-color: #e0e0e0;
-    padding: 8px;
-    border: 2px inset #ffffff;
-    margin-bottom: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 10px;
-    position: relative;
-}
-
-.search-area input {
-    width: 100%;
-    max-width: 280px;
-    padding: 4px;
-    border: 2px inset #000000;
-    background: #ffffff;
-    font-family: "Courier New", Courier, monospace;
-}
-
-.search-area button {
-    background-color: #c0c0c0;
-    border: 2px outset #ffffff;
-    padding: 3px 10px;
-    font-weight: bold;
-    cursor: pointer;
-    font-family: "Courier New", Courier, monospace;
-    position: relative;
-    transition: left 0.12s ease, top 0.12s ease;
-}
-
-.search-area button:active {
-    border-style: inset;
-}
-
-nav {
-    background-color: #d0d0d0;
-    padding: 8px;
-    border: 2px outset #ffffff;
-    text-align: center;
-    margin-bottom: 15px;
-}
-
-.nav-links span {
-    color: #000080;
-    font-weight: bold;
-    font-size: 1rem;
-    text-decoration: underline;
-}
-
-.hero-banner {
-    background-color: #008080;
-    color: #ffff00;
-    padding: 12px;
-    text-align: center;
-    border: 2px inset #ffffff;
-    margin-bottom: 15px;
-}
-
-.hero-banner h2 {
-    margin: 0 0 5px 0;
-    font-size: 1.1rem;
-}
-
-.hero-banner p {
-    margin: 0;
-    color: #ffffff;
-    font-size: 0.85rem;
-}
-
-.grid-produtos {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 12px;
-}
-
-.produto-card {
-    background-color: #f0f0f0;
-    border: 2px outset #ffffff;
-    padding: 8px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-}
-
-.produto-image-container {
-    width: 100%;
-    height: 140px;
-    background-color: #000000;
-    border: 2px inset #ffffff;
-    overflow: hidden;
-    margin-bottom: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.produto-retro-img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-    image-rendering: pixelated;
-}
-
-.no-photo-box {
-    width: 100%;
-    height: 140px;
-    background-color: #1a1a1a;
-    border: 2px inset #ffffff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 8px;
-    color: #888888;
-    font-size: 0.75rem;
-}
-
-.broken-icon {
-    font-size: 1.8rem;
-    margin-bottom: 4px;
-}
-
-.produto-info {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-.produto-nome {
-    font-size: 0.95rem;
-    color: #000080;
-    font-weight: bold;
-    margin-bottom: 4px;
-}
-
-.produto-preco {
-    color: #800000;
-    font-weight: bold;
-    margin-bottom: 4px;
-}
-
-.traits-count {
-    background-color: #ffffcc;
-    color: #000080;
-    border: 1px dotted #808000;
-    padding: 4px;
-    margin: 2px 0 8px;
-    font-size: 0.68rem;
-    line-height: 1.35;
-}
-
-.traits-count strong {
-    color: #800000;
-}
-
-.produto-desc {
-    font-size: 0.75rem;
-    color: #333333;
-    font-style: italic;
-    margin-bottom: 8px;
-    flex-grow: 1;
-}
-
-.btn-buy {
-    background-color: #d3d3d3;
-    color: #666666;
-    border: 2px inset #ffffff;
-    padding: 4px;
-    font-family: "Courier New", Courier, monospace;
-    font-weight: bold;
-    font-size: 0.75rem;
-    width: 100%;
-    cursor: not-allowed;
-    text-decoration: line-through;
-}
-
-.warning-tag {
-    background-color: #ffff99;
-    color: #cc0000;
-    font-size: 0.65rem;
-    font-weight: bold;
-    border: 1px dashed #cc0000;
-    padding: 2px;
-    margin-top: 4px;
-    margin-bottom: 4px;
-}
-
-.os-section {
-    display: none;
-    background-color: #008080;
-    border: 2px inset #ffffff;
-    height: 450px;
-    position: relative;
-    padding: 10px;
-    overflow: hidden;
-}
-
-.win-window {
-    background: #c0c0c0;
-    border: 2px solid;
-    border-color: #ffffff #000000 #000000 #ffffff;
-    width: 92%;
-    max-width: 400px;
-    position: absolute;
-    box-shadow: 2px 2px 0 #000000;
-    top: 15px;
-    left: 4%;
-}
-
-.win-titlebar {
-    background: #000080;
-    color: #ffffff;
-    font-weight: bold;
-    padding: 4px 5px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 0.85rem;
-    cursor: grab;
-    user-select: none;
-}
-
-.win-titlebar:active {
-    cursor: grabbing;
-}
-
-.win-close {
-    background: #c0c0c0;
-    border: 2px outset #ffffff;
-    color: #000000;
-    font-weight: bold;
-    font-size: 0.7rem;
-    width: 16px;
-    height: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-}
-
-.win-close:active {
-    border-style: inset;
-}
-
-.win-menubar {
-    background: #c0c0c0;
-    padding: 2px 5px;
-    font-size: 0.75rem;
-    border-bottom: 1px solid #808080;
-}
-
-.win-content {
-    background: #ffffff;
-    padding: 12px;
-    height: 220px;
-    border: 2px inset #ffffff;
-    display: flex;
-    gap: 15px;
-    flex-wrap: wrap;
-    align-content: flex-start;
-    overflow-y: auto;
-}
-
-.folder,
-.video-file {
-    text-align: center;
-    cursor: pointer;
-    width: 65px;
-}
-
-.folder-icon,
-.video-icon {
-    font-size: 2rem;
-    position: relative;
-}
-
-.folder-lock {
-    font-size: 0.8rem;
-    position: absolute;
-    bottom: -2px;
-    right: 2px;
-    background: #ffffff;
-    border-radius: 50%;
-}
-
-.video-play {
-    position: absolute;
-    right: -2px;
-    bottom: -2px;
-    background: #ffffff;
-    border-radius: 50%;
-    font-size: 0.7rem;
-    width: 16px;
-    height: 16px;
-    line-height: 16px;
-}
-
-.folder-name,
-.video-name {
-    font-size: 0.7rem;
-    color: #000000;
-    text-decoration: underline;
-    margin-top: 4px;
-    word-wrap: break-word;
-}
-
-.text-document {
-    display: none;
-    top: 40px;
-    left: 6%;
-    width: 88%;
-    max-width: 440px;
-    z-index: 10;
-}
-
-.notepad-textarea {
-    width: 100%;
-    height: 260px;
-    background: #ffffff;
-    border: 2px inset #ffffff;
-    resize: none;
-    font-family: "Courier New", Courier, monospace;
-    padding: 8px;
-    font-size: 0.8rem;
-    outline: none;
-    white-space: pre-wrap;
-    overflow-y: auto;
-}
-
-.video-window {
-    display: none;
-    top: 30px;
-    left: 4%;
-    width: 92%;
-    max-width: 600px;
-    z-index: 30;
-}
-
-.video-content {
-    background: #000000;
-    border: 2px inset #ffffff;
-    padding: 5px;
-}
-
-.video-content iframe {
-    width: 100%;
-    height: 315px;
-    border: 0;
-    display: block;
-}
-
-.video-credit {
-    background: #c0c0c0;
-    color: #000080;
-    padding: 5px;
-    font-size: 0.7rem;
-    text-align: right;
-    font-weight: bold;
-}
-
-footer {
-    margin-top: 15px;
-    background-color: #000080;
-    color: #ffffff;
-    text-align: center;
-    padding: 6px;
-    font-size: 0.75rem;
-    border: 2px inset #ffffff;
-}
-
-.counter {
-    font-family: monospace;
-    background: #000000;
-    color: #00ff00;
-    padding: 2px 6px;
-    border: 1px inset #ffffff;
-    display: inline-block;
-    margin-top: 4px;
-}
-
-.countdown-box {
-    position: fixed;
-    right: 12px;
-    bottom: 12px;
-    width: 285px;
-    background: #c0c0c0;
-    border: 2px solid;
-    border-color: #ffffff #000000 #000000 #ffffff;
-    box-shadow: 3px 3px 0 #000000;
-    z-index: 999;
-    font-size: 11px;
-}
-
-.countdown-title {
-    background: #000080;
-    color: #ffffff;
-    padding: 4px 6px;
-    font-weight: bold;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.countdown-title span:last-child {
-    color: #ffff00;
-}
-
-.countdown-body {
-    padding: 7px;
-    background: #c0c0c0;
-    border-top: 1px solid #808080;
-}
-
-.countdown-message {
-    color: #000000;
-    line-height: 1.3;
-    margin-bottom: 7px;
-}
-
-.countdown-timer {
-    background: #000000;
-    color: #00ff00;
-    border: 2px inset #ffffff;
-    padding: 5px;
-    text-align: center;
-    font-size: 15px;
-    font-weight: bold;
-    letter-spacing: 1px;
-}
-
-.countdown-finished {
-    color: #ff0000;
-    animation: blink 0.8s steps(2, start) infinite;
-}
-
-.retro-glitch {
-    animation: retroGlitch 0.28s steps(2, end);
-}
-
-@keyframes retroGlitch {
-    0% {
-        filter: none;
-    }
-
-    25% {
-        filter: hue-rotate(70deg) contrast(1.4);
-        transform: translateX(2px);
-    }
-
-    50% {
-        filter: invert(0.12) contrast(1.2);
-        transform: translateX(-2px);
-    }
-
-    75% {
-        filter: saturate(2) hue-rotate(-35deg);
-        transform: translateX(1px);
-    }
-
-    100% {
-        filter: none;
-        transform: translateX(0);
-    }
-}
-
-@keyframes blink {
-    50% {
-        opacity: 0;
-    }
-}
-
-@media (max-width: 600px) {
-    body {
-        padding: 5px;
-    }
-
-    .retro-container {
-        padding: 8px;
-    }
-
-    .grid-produtos {
-        grid-template-columns: 1fr;
-    }
-
-    .os-section {
-        height: 500px;
-    }
-
-    .video-window {
-        width: 94%;
-        left: 3%;
-    }
-
-    .video-content iframe {
-        height: 230px;
-    }
-
-    .countdown-box {
-        width: calc(100% - 24px);
-        right: 12px;
-        bottom: 12px;
-    }
-}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; min-height: 100%; }
+body { background: #008080; font-family: "MS Sans Serif", Tahoma, Arial, sans-serif; color: #000; }
+.retro-container { width: 100%; margin: 20px auto; background: #c0c0c0; border-top: 2px solid #fff; border-left: 2px solid #fff; border-right: 2px solid #0a0a0a; border-bottom: 2px solid #0a0a0a; padding: 2px; position: relative; }
+.mode-computer { max-width: 850px; }
+.inner-border { border-top: 2px solid #dfdfdf; border-left: 2px solid #dfdfdf; border-right: 2px solid #808080; border-bottom: 2px solid #808080; padding: 15px; }
+header { background: #000080; color: #fff; padding: 15px 10px; text-align: center; border-top: 2px solid #808080; border-left: 2px solid #808080; border-right: 2px solid #fff; border-bottom: 2px solid #fff; margin-bottom: 10px; position: relative; }
+.logo { font-size: 1.8rem; font-weight: bold; color: #ffff00; text-decoration: none; font-family: "Impact", sans-serif; letter-spacing: 2px; text-shadow: 2px 2px #000; }
+.countdown-box { background: #000; color: #00ff00; border: 2px inset #fff; padding: 8px; text-align: center; font-size: .75rem; margin-bottom: 15px; }
+.countdown-label { color: #fff; font-size: .65rem; margin-bottom: 4px; font-weight: bold; font-family: "Courier New", monospace; }
+#countdown { font-family: "Courier New", monospace; font-weight: bold; font-size: 1.1rem; }
+.marquee-bar { background: #fff; border: 2px inset #dfdfdf; padding: 4px; margin-bottom: 10px; font-size: .8rem; color: #000080; font-weight: bold; }
+nav { background: #c0c0c0; padding: 5px; border-top: 1px solid #fff; border-left: 1px solid #fff; border-right: 1px solid #808080; border-bottom: 1px solid #808080; margin-bottom: 15px; }
+.nav-links { display: flex; gap: 15px; }
+.nav-links a { color: #000; text-decoration: none; font-size: .85rem; padding: 2px 5px; }
+.nav-links a:hover { background: #000080; color: #fff; }
+.hero-banner { background: #000; color: #fff; padding: 15px; text-align: center; border: 2px inset #fff; margin-bottom: 20px; }
+.hero-banner h2 { margin: 0 0 15px; font-size: 1.3rem; color: #ff0000; font-family: "Courier New", monospace; text-shadow: 1px 1px #fff; }
+.stock-viewer { width: 100%; height: 150px; background: url('https://www.transparenttextures.com/patterns/stardust.png') #222; border: 2px inset #808080; display: flex; align-items: center; justify-content: center; overflow: hidden; margin-bottom: 10px; }
+.stock-image { max-width: 90%; max-height: 130px; object-fit: contain; image-rendering: pixelated; display: block; }
+.stock-image.fade { animation: imageFade .55s ease; }
+@keyframes imageFade { 0% { opacity: 0; transform: scale(.90); } 100% { opacity: 1; transform: scale(1); } }
+.product-grid { display: grid; grid-template-columns: 1fr; gap: 15px; max-width: 450px; margin: 0 auto; }
+.product-card { background: #c0c0c0; border-top: 2px solid #fff; border-left: 2px solid #fff; border-right: 2px solid #000; border-bottom: 2px solid #000; padding: 4px; text-align: center; display: flex; flex-direction: column; }
+.product-image-container { width: 100%; height: 240px; background: #fff; border: 2px inset #808080; overflow: hidden; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; }
+.product-retro-img { max-width: 100%; max-height: 100%; object-fit: contain; image-rendering: pixelated; }
+.product-info { display: flex; flex-direction: column; flex-grow: 1; padding: 5px; background: #fff; border: 2px inset #808080; margin-bottom: 10px; }
+.product-name { font-size: 1.1rem; color: #000080; font-weight: bold; margin-bottom: 5px; font-family: "Courier New", monospace; }
+.product-price { color: #008000; font-weight: bold; margin-bottom: 10px; font-size: 1.2rem; }
+.product-status { background: #ffffcc; border: 1px dashed #808080; padding: 8px; font-size: .8rem; line-height: 1.6; text-align: left; }
+.product-status strong { color: #000; }
+.stock { color: #ff0000; font-weight: bold; }
+.state { color: #000080; font-weight: bold; }
+.btn-buy { background: #c0c0c0; color: #000; border-top: 2px solid #fff; border-left: 2px solid #fff; border-right: 2px solid #000; border-bottom: 2px solid #000; padding: 10px; font-family: "MS Sans Serif", Tahoma, sans-serif; font-weight: bold; font-size: 1rem; width: 100%; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 10px; }
+.btn-buy:active { border-top: 2px solid #000; border-left: 2px solid #000; border-right: 2px solid #fff; border-bottom: 2px solid #fff; padding: 11px 9px 9px 11px; }
+.btn-buy:disabled { color: #808080; cursor: default; text-shadow: 1px 1px #fff; border-top: 2px solid #fff; border-left: 2px solid #fff; border-right: 2px solid #000; border-bottom: 2px solid #000; padding: 10px; }
+footer { margin-top: 20px; background: #c0c0c0; text-align: center; padding: 10px; font-size: .8rem; border-top: 1px solid #fff; border-left: 1px solid #fff; border-right: 1px solid #808080; border-bottom: 1px solid #808080; display: flex; justify-content: space-between; align-items: center; }
+.counter { font-family: "Courier New", monospace; background: #000; color: #ff0000; padding: 4px 8px; border: 2px inset #808080; letter-spacing: 2px; }
+#video-screen { display: none; position: fixed; inset: 0; background: url('https://www.transparenttextures.com/patterns/stardust.png') #008080; z-index: 10000; color: #000; font-family: "MS Sans Serif", sans-serif; flex-direction: column; align-items: center; justify-content: center; }
+.video-window { width: min(800px, 94vw); background: #c0c0c0; border-top: 2px solid #fff; border-left: 2px solid #fff; border-right: 2px solid #000; border-bottom: 2px solid #000; padding: 2px; }
+.video-titlebar { background: #000080; color: #fff; padding: 4px 6px; font-size: .9rem; font-weight: bold; display: flex; align-items: center; justify-content: space-between; margin-bottom: 2px; }
+.video-title { color: #fff; }
+.video-area { width: 100%; background: #000; aspect-ratio: 4 / 3; display: flex; align-items: center; justify-content: center; border: 2px inset #808080; }
+#main-video { width: 100%; height: 100%; object-fit: contain; display: block; }
+.video-controls { height: 45px; background: #c0c0c0; display: flex; align-items: center; gap: 8px; padding: 8px; }
+.video-control { min-width: 45px; height: 30px; background: #c0c0c0; color: #000; border-top: 2px solid #fff; border-left: 2px solid #fff; border-right: 2px solid #000; border-bottom: 2px solid #000; font-family: "MS Sans Serif", sans-serif; font-weight: bold; cursor: pointer; display: flex; justify-content: center; align-items: center; }
+.video-control:active { border-top: 2px solid #000; border-left: 2px solid #000; border-right: 2px solid #fff; border-bottom: 2px solid #fff; }
+.video-control.disabled { color: #808080; cursor: default; }
+.video-filename { margin-left: auto; color: #000; font-size: .8rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 45%; border: 1px inset #808080; padding: 3px 6px; background: #fff; }
+@media (max-width: 600px) { .countdown-box { margin-bottom: 10px; } .hero-banner p { font-size: .85rem; } }
 </style>
 </head>
-
 <body>
-
-<div id="device-modal">
-    <div class="modal-box">
-        <div class="modal-titlebar">System Setup - Toy Palace</div>
-        <div class="modal-content">
-            <p>Hello, welcome to our website.<br>Please select your device:</p>
-            <div class="modal-buttons">
-                <button class="modal-btn" onclick="setDevice('computer')">Computer</button>
-                <button class="modal-btn" onclick="setDevice('mobile')">Mobile</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 <div class="retro-container mode-computer" id="main-container">
-
-<header>
-    <a href="#" class="logo">TOY PALACE</a>
-</header>
-
-<div class="search-area">
-    <input type="text" id="searchInput" placeholder="Your search starts here..." onkeydown="handleTyping(event)">
-    <button id="goButton" onclick="handleSearch(); playClick();">Go</button>
-</div>
-
-<nav>
-    <div class="nav-links">
-        <span>FRIENDS CATALOG · 2002</span>
-    </div>
-</nav>
-
-<div id="main-content">
-
-<section class="hero-banner" id="hero">
-    <h2>Your new friends have arrived!</h2>
-    <p>(Check out our latest releases for lots of fun!)</p>
-</section>
-
-<main id="friends-section">
-
-<div class="grid-produtos">
-
-<div class="produto-card">
-    <div class="produto-image-container">
-        <img src="PsooPlushie.png" alt="Psoo Plushie" class="produto-retro-img">
-    </div>
-    <div class="produto-info">
-        <div class="produto-nome">Psoo Plushie</div>
-        <div class="produto-preco">$20.00</div>
-        <div class="warning-tag"># Last unit purchased #</div>
-        <div class="produto-desc">
-            Adventurous, brave, a true friend.
-            <div class="traits-count">
-                Look how cool! This little friend has <strong>3 characteristics.</strong>
+    <div class="inner-border">
+        <header>
+            <a href="#" class="logo">TOY PALACE</a>
+        </header>
+        <nav>
+            <div class="nav-links">
+                <a href="#">File</a>
+                <a href="#">Edit</a>
+                <a href="#">View</a>
+                <a href="#">Favorites</a>
+                <a href="#">Help</a>
             </div>
+        </nav>
+        <div class="marquee-bar">
+            <marquee scrollamount="4">WELCOME TO TOY PALACE - YOUR #1 SOURCE FOR RARE TOYS ON THE WORLD WIDE WEB - UPDATED DAILY!</marquee>
+        </div>
+        <div class="countdown-box">
+            <div class="countdown-label">SYSTEM SHUTDOWN SEQUENCE</div>
+            <div id="countdown">00d 00h 00m 00s</div>
+        </div>
+        <div id="main-content">
+            <section class="hero-banner">
+                <h2>!!! OUT OF STOCK WARNING !!!</h2>
+                <div class="stock-viewer">
+                    <img id="stockImage" class="stock-image" src="PenguinDoug.png" alt="Missing Toy">
+                </div>
+                <p>We apologize, but our limited inventory has been completely depleted due to high demand. Manufacturing will resume shortly.</p>
+            </section>
+            <main class="showcase">
+                <div class="product-grid">
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="PsooPlushie.png" alt="Psoo Plushie" class="product-retro-img">
+                        </div>
+                        <div class="product-info">
+                            <div class="product-name">Psoo Plushie (1998 Ed.)</div>
+                            <div class="product-price">$20.00 USD</div>
+                            <div class="product-status">
+                                <div><strong>Inventory:</strong> <span class="stock" id="stockCount">1 Unit Remaining</span></div>
+                                <div><strong>System Status:</strong> <span class="state" id="systemStatus">Abandoned / Lost</span></div>
+                                <div><strong>Condition:</strong> Mint In Box (MIB)</div>
+                            </div>
+                        </div>
+                        <button id="buyBtn" class="btn-buy" onclick="buyPsoo(); playClick();">
+                            <img id="buyIcon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" width="16" height="16" style="background:#008000"> 
+                            <span id="buyText">Add to Cart</span>
+                        </button>
+                    </div>
+                </div>
+            </main>
+        </div>
+        <footer>
+            <span>&copy; 1998-2002 Toy Palace Inc.</span>
+            <div class="counter">001254</div>
+        </footer>
+    </div>
+</div>
+<div id="video-screen">
+    <div class="video-window">
+        <div class="video-titlebar">
+            <span class="video-title" id="video-title">Media Player</span>
+        </div>
+        <div class="video-area">
+            <video id="main-video" preload="auto" playsinline></video>
+        </div>
+        <div class="video-controls">
+            <button class="video-control" onclick="toggleVideo()">&#9658;</button>
+            <button class="video-control" onclick="toggleVideo()">&#10074;&#10074;</button>
+            <button class="video-control disabled" disabled>&#9632;</button>
+            <span class="video-filename" id="video-filename">Loading...</span>
         </div>
     </div>
-    <button class="btn-buy" disabled>[ UNAVAILABLE ]</button>
 </div>
-
-<div class="produto-card">
-    <div class="produto-image-container">
-        <img src="PenguinDoug.png" alt="Doug Plushie" class="produto-retro-img">
-    </div>
-    <div class="produto-info">
-        <div class="produto-nome">Doug Plushie</div>
-        <div class="produto-preco">$20.00</div>
-        <div class="warning-tag"># Last unit purchased #</div>
-        <div class="produto-desc">
-            Silly, a good friend.
-            <div class="traits-count">
-                Look how cool! This little friend has <strong>2 characteristics.</strong>
-            </div>
-        </div>
-    </div>
-    <button class="btn-buy" disabled>[ UNAVAILABLE ]</button>
-</div>
-
-<div class="produto-card">
-    <div class="no-photo-box">
-        <div class="broken-icon">📷̸</div>
-        <span>[ NO PHOTO ]</span>
-    </div>
-    <div class="produto-info">
-        <div class="produto-nome">Wood Little Bo-Peep</div>
-        <div class="produto-preco">$20.00</div>
-        <div class="produto-desc">
-            Reliable, calm, loving.
-            <div class="traits-count">
-                Look how cool! This little friend has <strong>3 characteristics.</strong>
-            </div>
-        </div>
-    </div>
-    <button class="btn-buy" disabled>[ UNAVAILABLE ]</button>
-</div>
-
-<div class="produto-card">
-    <div class="produto-image-container">
-        <img src="DoctorMender.png" alt="Little Doctor Mender" class="produto-retro-img">
-    </div>
-    <div class="produto-info">
-        <div class="produto-nome">Little Doctor Mender</div>
-        <div class="produto-preco">$20.00</div>
-        <div class="produto-desc">
-            Loves to help, trusts in second chances.
-            <div class="traits-count">
-                Look how cool! This little friend has <strong>2 characteristics.</strong>
-            </div>
-        </div>
-    </div>
-    <button class="btn-buy" disabled>[ UNAVAILABLE ]</button>
-</div>
-
-<div class="produto-card">
-    <div class="no-photo-box">
-        <div class="broken-icon">📷̸</div>
-        <span>[ NO PHOTO ]</span>
-    </div>
-    <div class="produto-info">
-        <div class="produto-nome">Teddy Cop</div>
-        <div class="produto-preco">$20.00</div>
-        <div class="produto-desc">
-            Defender, loves justice.
-            <div class="traits-count">
-                Look how cool! This little friend has <strong>2 characteristics.</strong>
-            </div>
-        </div>
-    </div>
-    <button class="btn-buy" disabled>[ UNAVAILABLE ]</button>
-</div>
-
-</div>
-</main>
-
-<div id="os-section" class="os-section">
-
-<div class="win-window" id="folder-window">
-
-<div class="win-titlebar" id="folder-header">
-    <span>(C:) \toy_palace\records</span>
-    <div class="win-close" onclick="closeOS(); playClick();">x</div>
-</div>
-
-<div class="win-menubar">
-    File&nbsp;&nbsp;&nbsp; Edit&nbsp;&nbsp;&nbsp; View&nbsp;&nbsp;&nbsp; Help
-</div>
-
-<div class="win-content">
-
-<div class="folder" onclick="openFile(1); playClick();">
-    <div class="folder-icon">
-        📁
-        <span class="folder-lock">🔒</span>
-    </div>
-    <div class="folder-name">Success.txt</div>
-</div>
-
-<div class="folder" onclick="openFile(2); playClick();">
-    <div class="folder-icon">
-        📁
-        <span class="folder-lock">🔒</span>
-    </div>
-    <div class="folder-name" style="color:#997a00;font-weight:bold;background:#ffffe0;border:1px dotted #cca300;">
-        Decline.txt
-    </div>
-</div>
-
-<div class="video-file" onclick="openVideo(); playClick();">
-    <div class="video-icon">
-        🎞️
-        <span class="video-play">▶</span>
-    </div>
-    <div class="video-name">Truth</div>
-</div>
-
-</div>
-</div>
-
-<div class="win-window text-document" id="notepad-window">
-
-<div class="win-titlebar" id="notepad-header">
-    <span id="notepad-title">Notepad</span>
-    <div class="win-close" onclick="closeNotepad(); playClick();">x</div>
-</div>
-
-<div class="win-menubar">
-    File&nbsp;&nbsp;&nbsp; Edit&nbsp;&nbsp;&nbsp; Search&nbsp;&nbsp;&nbsp; Help
-</div>
-
-<div class="notepad-textarea" id="notepad-text"></div>
-
-</div>
-
-<div class="win-window video-window" id="video-window">
-
-<div class="win-titlebar" id="video-header">
-    <span>Truth - Media Player</span>
-    <div class="win-close" onclick="closeVideo(); playClick();">x</div>
-</div>
-
-<div class="win-menubar">
-    File&nbsp;&nbsp;&nbsp; View&nbsp;&nbsp;&nbsp; Play&nbsp;&nbsp;&nbsp; Help
-</div>
-
-<div class="video-content">
-    <iframe
-        id="youtube-frame"
-        src=""
-        title="Truth"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen>
-    </iframe>
-</div>
-
-<div class="video-credit">
-    @telastory0
-</div>
-
-</div>
-
-</div>
-</div>
-
-<footer>
-    <p>&copy; 2002 Toy Palace Co. All rights reserved.</p>
-    <div class="counter">Visitors: 001254</div>
-</footer>
-
-</div>
-
-<div class="countdown-box">
-
-<div class="countdown-title">
-    <span>TOY PALACE SYSTEM</span>
-    <span>!</span>
-</div>
-
-<div class="countdown-body">
-
-<div class="countdown-message">
-    You discovered my site, you invaded my past and you're playing with it. But luckily, this will be over soon.
-</div>
-
-<div class="countdown-timer" id="countdown">
-    00d 00h 00m 00s
-</div>
-
-</div>
-</div>
-
 <script>
 document.addEventListener("contextmenu", function(event) {
     event.preventDefault();
 });
-
 document.addEventListener("keydown", function(event) {
-    const key = event.key.toLowerCase();
-
-    if (
-        key === "f12" ||
-        (event.ctrlKey && event.shiftKey && ["i", "j", "c", "k"].includes(key)) ||
-        (event.ctrlKey && ["u", "s"].includes(key))
-    ) {
-        event.preventDefault();
-        event.stopPropagation();
-        return false;
-    }
-});
-
-document.addEventListener("touchstart", function(event) {
-    if (event.touches.length > 1) {
+    if (event.key === "F12" || (event.ctrlKey && event.shiftKey && ["I","J","C","K"].includes(event.key.toUpperCase())) || (event.ctrlKey && event.key.toUpperCase() === "U")) {
         event.preventDefault();
     }
-}, { passive: false });
-
-document.addEventListener("gesturestart", function(event) {
-    event.preventDefault();
 });
 
 let audioCtx = null;
 let bgMusicInterval = null;
-let suspenseStep = 0;
+let musicIndex = 0;
+let isPlayingMusic = false;
+let audioInitialized = false;
+
+// Toca a música no primeiro clique na página
+document.addEventListener("click", function() {
+    if (!audioInitialized) {
+        startBackgroundMusic();
+        audioInitialized = true;
+    }
+}, { once: true });
 
 function initAudio() {
     if (!audioCtx) {
         audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     }
-
-    if (audioCtx.state === "suspended") {
-        audioCtx.resume();
-    }
 }
 
 function startBackgroundMusic() {
     initAudio();
-
-    if (!audioCtx) {
-        return;
-    }
-
-    if (bgMusicInterval) {
-        clearInterval(bgMusicInterval);
-    }
-
-    const notes = [
-        110,
-        130.81,
-        146.83,
-        110,
-        98,
-        123.47,
-        110,
-        82.41
+    if (!audioCtx) return;
+    if (isPlayingMusic) return;
+    isPlayingMusic = true;
+    
+    const melody = [
+        { freq: 261.63, duration: 250 },
+        { freq: 329.63, duration: 250 },
+        { freq: 392.00, duration: 250 },
+        { freq: 523.25, duration: 750 },
+        { freq: 440.00, duration: 250 },
+        { freq: 392.00, duration: 1000 },
+        { freq: 0,      duration: 500 },
+        { freq: 261.63, duration: 250 },
+        { freq: 329.63, duration: 250 },
+        { freq: 392.00, duration: 250 },
+        { freq: 523.25, duration: 750 },
+        { freq: 440.00, duration: 250 },
+        { freq: 392.00, duration: 1000 },
+        { freq: 0,      duration: 1000 }
     ];
-
-    let index = 0;
-
-    bgMusicInterval = setInterval(function() {
+    musicIndex = 0;
+    
+    if (bgMusicInterval) {
+        clearTimeout(bgMusicInterval);
+    }
+    
+    function playNextNote() {
+        if (!audioCtx || !isPlayingMusic) return;
         try {
-            const osc = audioCtx.createOscillator();
-            const gain = audioCtx.createGain();
-            const filter = audioCtx.createBiquadFilter();
+            const note = melody[musicIndex];
+            if (note.freq > 0) {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = "triangle";
+                osc.frequency.setValueAtTime(note.freq, audioCtx.currentTime);
+                gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + (note.duration / 1000) - 0.05);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + (note.duration / 1000));
+            }
+            musicIndex = (musicIndex + 1) % melody.length;
+            bgMusicInterval = setTimeout(playNextNote, note.duration);
+        } catch (e) {}
+    }
+    playNextNote();
+}
 
-            osc.type = "sine";
-
-            osc.frequency.setValueAtTime(
-                notes[index],
-                audioCtx.currentTime
-            );
-
-            index = (index + 1) % notes.length;
-
-            filter.type = "lowpass";
-            filter.frequency.setValueAtTime(
-                420,
-                audioCtx.currentTime
-            );
-
-            gain.gain.setValueAtTime(
-                0.025,
-                audioCtx.currentTime
-            );
-
-            gain.gain.exponentialRampToValueAtTime(
-                0.001,
-                audioCtx.currentTime + 1.7
-            );
-
-            osc.connect(filter);
-            filter.connect(gain);
-            gain.connect(audioCtx.destination);
-
-            osc.start();
-            osc.stop(audioCtx.currentTime + 1.7);
-        } catch (error) {}
-    }, 1800);
-
-    if (suspenseStep === 0) {
-        suspenseStep = 1;
+function stopBackgroundMusic() {
+    isPlayingMusic = false;
+    if (bgMusicInterval) {
+        clearTimeout(bgMusicInterval);
+        bgMusicInterval = null;
     }
 }
 
 function playClick() {
     try {
         initAudio();
-
-        if (!audioCtx) {
-            return;
-        }
-
         const osc = audioCtx.createOscillator();
         const gain = audioCtx.createGain();
-
         osc.type = "square";
-
-        osc.frequency.setValueAtTime(
-            600,
-            audioCtx.currentTime
-        );
-
-        osc.frequency.exponentialRampToValueAtTime(
-            180,
-            audioCtx.currentTime + 0.07
-        );
-
-        gain.gain.setValueAtTime(
-            0.07,
-            audioCtx.currentTime
-        );
-
-        gain.gain.exponentialRampToValueAtTime(
-            0.001,
-            audioCtx.currentTime + 0.07
-        );
-
+        osc.frequency.setValueAtTime(800, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(300, audioCtx.currentTime + .04);
+        gain.gain.setValueAtTime(.2, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(.01, audioCtx.currentTime + .04);
         osc.connect(gain);
         gain.connect(audioCtx.destination);
-
         osc.start();
-        osc.stop(audioCtx.currentTime + 0.07);
-    } catch (error) {}
+        osc.stop(audioCtx.currentTime + .04);
+    } catch(e) {}
 }
 
-function playEscapeSound() {
-    try {
-        initAudio();
-
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-
-        osc.type = "sawtooth";
-
-        osc.frequency.setValueAtTime(
-            170,
-            audioCtx.currentTime
-        );
-
-        osc.frequency.exponentialRampToValueAtTime(
-            90,
-            audioCtx.currentTime + 0.12
-        );
-
-        gain.gain.setValueAtTime(
-            0.045,
-            audioCtx.currentTime
-        );
-
-        gain.gain.exponentialRampToValueAtTime(
-            0.001,
-            audioCtx.currentTime + 0.12
-        );
-
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-
-        osc.start();
-        osc.stop(audioCtx.currentTime + 0.12);
-    } catch (error) {}
-}
-
-function handleTyping(event) {
-    if (event && event.key === "Enter") {
-        handleSearch();
-        playClick();
-        return;
-    }
-
-    try {
-        initAudio();
-
-        if (!audioCtx) {
-            return;
-        }
-
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-
-        osc.type = "sine";
-
-        osc.frequency.setValueAtTime(
-            350 + Math.random() * 160,
-            audioCtx.currentTime
-        );
-
-        gain.gain.setValueAtTime(
-            0.025,
-            audioCtx.currentTime
-        );
-
-        gain.gain.exponentialRampToValueAtTime(
-            0.001,
-            audioCtx.currentTime + 0.025
-        );
-
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-
-        osc.start();
-        osc.stop(audioCtx.currentTime + 0.025);
-    } catch (error) {}
-}
-
-function setDevice(type) {
-    playClick();
-    startBackgroundMusic();
-
-    const container =
-        document.getElementById("main-container");
-
-    const modal =
-        document.getElementById("device-modal");
-
-    if (type === "mobile") {
-        container.classList.remove("mode-computer");
-        container.classList.add("mode-mobile");
-    } else {
-        container.classList.remove("mode-mobile");
-        container.classList.add("mode-computer");
-    }
-
-    modal.style.display = "none";
-}
-
-const goButton =
-    document.getElementById("goButton");
-
-let goEscapes = 0;
-let goLocked = false;
-
-function moveGoButton() {
-    if (goEscapes >= 3 || goLocked) {
-        return;
-    }
-
-    goEscapes++;
-
-    const directions = [
-        [-48, 0],
-        [48, 0],
-        [0, -18],
-        [0, 18],
-        [-35, -16],
-        [35, 16]
-    ];
-
-    const direction =
-        directions[
-            Math.floor(
-                Math.random() * directions.length
-            )
-        ];
-
-    goButton.style.transform =
-        "translate(" +
-        direction[0] +
-        "px, " +
-        direction[1] +
-        "px)";
-
-    playEscapeSound();
-
-    setTimeout(function() {
-        goButton.style.transform = "translate(0, 0)";
-
-        if (goEscapes >= 3) {
-            goLocked = true;
-            goButton.style.cursor = "pointer";
-        }
-    }, 280);
-}
-
-goButton.addEventListener("mouseenter", function() {
-    if (goEscapes < 3 && !goLocked) {
-        moveGoButton();
-    }
-});
-
-goButton.addEventListener("touchstart", function(event) {
-    if (goEscapes < 3 && !goLocked) {
-        event.preventDefault();
-        moveGoButton();
-    }
-}, { passive: false });
-
-function normalizePath(value) {
-    return value
-        .toLowerCase()
-        .trim()
-        .replace(/\s+/g, "")
-        .replace(/\//g, "\\")
-        .replace(/\\+/g, "\\");
-}
-
-function handleSearch() {
-    const input =
-        normalizePath(
-            document.getElementById("searchInput").value
-        );
-
-    const simplified =
-        input
-            .replace(/\.txt$/i, "")
-            .replace(/\\+$/g, "");
-
-    const accepted =
-        input === "c:\\folder\\emails.txt" ||
-        input === "c:\\folder\\email.txt" ||
-        input === "c:\\folder\\emails" ||
-        input === "c:\\folder\\email" ||
-        input === "c:\\emails.txt" ||
-        input === "c:\\email.txt" ||
-        simplified === "c:\\folder\\emails" ||
-        simplified === "c:\\folder\\email" ||
-        simplified === "c:\\emails" ||
-        simplified === "c:\\email";
-
-    if (accepted) {
-        document.getElementById("hero").style.display = "none";
-        document.getElementById("friends-section").style.display = "none";
-        document.getElementById("os-section").style.display = "block";
-        document.getElementById("searchInput").value = "";
-    } else {
-        alert("ERROR 404: File or directory not found.");
-    }
-}
-
-function closeOS() {
-    closeVideo();
-    closeNotepad();
-
-    document.getElementById("hero").style.display = "block";
-    document.getElementById("friends-section").style.display = "block";
-    document.getElementById("os-section").style.display = "none";
-}
-
-const filesData = {
-    1: {
-        pass: "32322",
-        title: "Success.txt - Notepad",
-        content:
-            "========================================\n" +
-            "DOCUMENT 01: The Success of Toy Palace\n" +
-            "AUTHOR: Alice Thomps (Founder & Owner)\n" +
-            "DATE: June 15, 1998\n" +
-            "========================================\n\n" +
-            "I am extremely happy and fulfilled. As the owner and creator of Toy Palace, I can proudly state that the launch of our 'Friends' line is an absolute success!\n\n" +
-            "The orders are rolling in, and stores are selling out of stock in record time. We created these toys (like our loyal white dog and his companions) to be more than just objects: they are true lifelong friends for children, a real family.\n\n" +
-            "If we keep growing at this pace, we will touch the childhood of an entire generation unforgettably. Thank you to all our staff for their dedication.\n\n" +
-            "<span style='background-color:#ffff99;color:#cc0000;font-weight:bold;padding:0 4px;border:1px dashed #cc0000;'>[EOF]</span>"
-    },
-
-    2: {
-        pass: "EOF",
-        title: "Decline.txt - Notepad",
-        content:
-            "========================================\n" +
-            "DOCUMENT 02: The Decline\n" +
-            "AUTHOR: Alice Thomps (Founder & Owner)\n" +
-            "DATE: October 12, 2002\n" +
-            "========================================\n\n" +
-            "[ CONFIDENTIAL RECORD ]\n\n" +
-            "We had wonderful years of sales. We were even planning brand new toy lines and projects for the future.\n\n" +
-            "However, it ultimately didn't work out. The decline hit us hard. Sales completely slowed down and stopped matching what they used to be when we first started.\n\n" +
-            "The modern digital era and new technology took over kids' interests entirely. Traditional toys were forgotten, left behind in boxes.\n\n" +
-            "With a heavy heart, we decided to give up the project and shut everything down. Our dear friends deserve better, but our time has run out.\n\n" +
-            "[END OF TRANSMISSION]"
-    }
-};
-
-function normalizePassword(value) {
-    return value
-        .toLowerCase()
-        .trim()
-        .replace(/\s+/g, "");
-}
-
-function openFile(fileId) {
-    const userInput =
-        prompt("Enter password:");
-
-    if (userInput === null) {
-        return;
-    }
-
-    const entered =
-        normalizePassword(userInput);
-
-    const correct =
-        normalizePassword(
-            filesData[fileId].pass
-        );
-
-    if (entered === correct) {
-        document.getElementById("notepad-title").innerText =
-            filesData[fileId].title;
-
-        document.getElementById("notepad-text").innerHTML =
-            filesData[fileId].content;
-
-        document.getElementById("notepad-window").style.display =
-            "block";
-
-        document.getElementById("notepad-window").style.zIndex =
-            "20";
-
-        document.getElementById("folder-window").style.zIndex =
-            "10";
-    } else {
-        alert("ACCESS DENIED: Password incorrect.");
-    }
-}
-
-function closeNotepad() {
-    document.getElementById("notepad-window").style.display =
-        "none";
-}
-
-function openVideo() {
-    const videoWindow =
-        document.getElementById("video-window");
-
-    const frame =
-        document.getElementById("youtube-frame");
-
-    frame.src =
-        "https://www.youtube.com/embed/UjkAEALy_5g?autoplay=1";
-
-    videoWindow.style.display =
-        "block";
-
-    videoWindow.style.zIndex =
-        "30";
-
-    document.getElementById("folder-window").style.zIndex =
-        "10";
-
-    document.getElementById("notepad-window").style.zIndex =
-        "20";
-}
-
-function closeVideo() {
-    const videoWindow =
-        document.getElementById("video-window");
-
-    const frame =
-        document.getElementById("youtube-frame");
-
-    frame.src = "";
-
-    videoWindow.style.display =
-        "none";
-}
-
-function makeDraggable(elmnt, header) {
-    let pos1 = 0;
-    let pos2 = 0;
-    let pos3 = 0;
-    let pos4 = 0;
-
-    header.onmousedown = dragMouseDown;
-    header.ontouchstart = dragMouseDown;
-
-    function dragMouseDown(e) {
-        e = e || window.event;
-
-        playClick();
-
-        document.getElementById("folder-window").style.zIndex =
-            "10";
-
-        document.getElementById("notepad-window").style.zIndex =
-            "10";
-
-        document.getElementById("video-window").style.zIndex =
-            "10";
-
-        elmnt.style.zIndex =
-            "30";
-
-        pos3 =
-            e.clientX ||
-            (e.touches ? e.touches[0].clientX : 0);
-
-        pos4 =
-            e.clientY ||
-            (e.touches ? e.touches[0].clientY : 0);
-
-        document.onmouseup =
-            closeDragElement;
-
-        document.onmousemove =
-            elementDrag;
-
-        document.ontouchend =
-            closeDragElement;
-
-        document.ontouchmove =
-            elementDrag;
-    }
-
-    function elementDrag(e) {
-        e = e || window.event;
-
-        const clientX =
-            e.clientX ||
-            (e.touches ? e.touches[0].clientX : 0);
-
-        const clientY =
-            e.clientY ||
-            (e.touches ? e.touches[0].clientY : 0);
-
-        pos1 =
-            pos3 - clientX;
-
-        pos2 =
-            pos4 - clientY;
-
-        pos3 =
-            clientX;
-
-        pos4 =
-            clientY;
-
-        elmnt.style.top =
-            (elmnt.offsetTop - pos2) + "px";
-
-        elmnt.style.left =
-            (elmnt.offsetLeft - pos1) + "px";
-    }
-
-    function closeDragElement() {
-        document.onmouseup = null;
-        document.onmousemove = null;
-        document.ontouchend = null;
-        document.ontouchmove = null;
-    }
-}
-
-function randomRetroGlitch() {
-    const page =
-        document.getElementById("main-container");
-
-    if (!page) {
-        return;
-    }
-
-    if (
-        document.getElementById("device-modal").style.display !== "none"
-    ) {
-        return;
-    }
-
-    page.classList.add("retro-glitch");
-
-    setTimeout(function() {
-        page.classList.remove("retro-glitch");
-    }, 300);
-}
-
-function scheduleRetroGlitch() {
-    const delay =
-        12000 + Math.random() * 25000;
-
-    setTimeout(function() {
-        randomRetroGlitch();
-        scheduleRetroGlitch();
-    }, delay);
-}
-
-const countdownTarget =
-    new Date("2026-09-01T12:00:00").getTime();
+const targetDate = new Date("2026-09-01T12:00:00-03:00").getTime();
 
 function updateCountdown() {
-    const now =
-        new Date().getTime();
+    const now = Date.now();
+    let difference = targetDate - now;
+    if (difference < 0) {
+        difference = 0;
+    }
+    const totalSeconds = Math.floor(difference / 1000);
+    const days = Math.floor(totalSeconds / 86400);
+    const hours = Math.floor((totalSeconds % 86400) / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+    document.getElementById("countdown").textContent = String(days).padStart(2, "0") + "d " + String(hours).padStart(2, "0") + "h " + String(minutes).padStart(2, "0") + "m " + String(seconds).padStart(2, "0") + "s";
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
 
-    const difference =
-        countdownTarget - now;
+let videoUsed = false;
+const videoScreen = document.getElementById("video-screen");
+const video = document.getElementById("main-video");
+const videoTitle = document.getElementById("video-title");
+const videoFilename = document.getElementById("video-filename");
 
-    const countdown =
-        document.getElementById("countdown");
-
-    if (difference <= 0) {
-        countdown.innerHTML =
-            "00d 00h 00m 00s";
-
-        countdown.classList.add(
-            "countdown-finished"
-        );
-
+function buyPsoo() {
+    if (videoUsed) {
         return;
     }
-
-    const totalSeconds =
-        Math.floor(
-            difference / 1000
-        );
-
-    const days =
-        Math.floor(
-            totalSeconds / 86400
-        );
-
-    const hours =
-        Math.floor(
-            (totalSeconds % 86400) / 3600
-        );
-
-    const minutes =
-        Math.floor(
-            (totalSeconds % 3600) / 60
-        );
-
-    const seconds =
-        totalSeconds % 60;
-
-    countdown.innerHTML =
-        String(days).padStart(2, "0") +
-        "d " +
-        String(hours).padStart(2, "0") +
-        "h " +
-        String(minutes).padStart(2, "0") +
-        "m " +
-        String(seconds).padStart(2, "0") +
-        "s";
+    videoUsed = true;
+    stopBackgroundMusic();
+    openVideo("PsooUnboxing.mp4", "C:\\VIDEOS\\PsooUnboxing.avi");
 }
 
-makeDraggable(
-    document.getElementById("folder-window"),
-    document.getElementById("folder-header")
-);
+function openVideo(source, filename) {
+    video.pause();
+    video.src = source;
+    videoTitle.textContent = "Windows Media Player";
+    videoFilename.textContent = filename;
+    videoScreen.style.display = "flex";
+    video.load();
+    setTimeout(function() {
+        video.play().catch(function() {});
+    }, 500);
+}
 
-makeDraggable(
-    document.getElementById("notepad-window"),
-    document.getElementById("notepad-header")
-);
+function toggleVideo() {
+    if (video.paused) {
+        video.play().catch(function() {});
+    } else {
+        video.pause();
+    }
+}
 
-makeDraggable(
-    document.getElementById("video-window"),
-    document.getElementById("video-header")
-);
+video.addEventListener("ended", function() {
+    video.pause();
+    video.removeAttribute("src");
+    video.load();
+    videoScreen.style.display = "none";
+    
+    document.getElementById("stockCount").textContent = "0 Units (OUT OF STOCK)";
+    document.getElementById("systemStatus").textContent = "Unavailable";
+    
+    const btn = document.getElementById("buyBtn");
+    btn.disabled = true;
+    document.getElementById("buyIcon").style.background = "#808080";
+    document.getElementById("buyText").textContent = "OUT OF STOCK";
+    
+    startBackgroundMusic();
+});
 
-updateCountdown();
-
-setInterval(
-    updateCountdown,
-    1000
-);
-
-window.addEventListener(
-    "load",
-    scheduleRetroGlitch
-);
+const stockImages = ["PenguinDoug.png", "DoctorMender.png", "BoPeep.png", "TeddyCop.png"];
+let stockIndex = 0;
+const stockImage = document.getElementById("stockImage");
+setInterval(function() {
+    stockIndex++;
+    if (stockIndex >= stockImages.length) {
+        stockIndex = 0;
+    }
+    stockImage.classList.remove("fade");
+    void stockImage.offsetWidth;
+    stockImage.src = stockImages[stockIndex];
+    stockImage.classList.add("fade");
+}, 2500);
 </script>
-
 </body>
 </html>
