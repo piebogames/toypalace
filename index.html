@@ -102,7 +102,7 @@ footer { margin-top: 20px; background: #c0c0c0; text-align: center; padding: 10p
                                 <div><strong>Condition:</strong> Mint In Box (MIB)</div>
                             </div>
                         </div>
-                        <button id="buyBtn" class="btn-buy" onclick="buyPsoo(); playClick();">
+                        <button id="buyBtn" class="btn-buy" onclick="buyPsoo();">
                             <img id="buyIcon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" width="16" height="16" style="background:#008000"> 
                             <span id="buyText">Add to Cart</span>
                         </button>
@@ -122,7 +122,9 @@ footer { margin-top: 20px; background: #c0c0c0; text-align: center; padding: 10p
             <span class="video-title" id="video-title">Media Player</span>
         </div>
         <div class="video-area">
-            <video id="main-video" preload="auto" playsinline></video>
+            <video id="main-video" preload="auto" playsinline>
+                <source src="PsooUnboxing.mp4" type="video/mp4">
+            </video>
         </div>
         <div class="video-controls">
             <button class="video-control" onclick="toggleVideo()">&#9658;</button>
@@ -141,101 +143,6 @@ document.addEventListener("keydown", function(event) {
         event.preventDefault();
     }
 });
-
-let audioCtx = null;
-let bgMusicInterval = null;
-let musicIndex = 0;
-let isPlayingMusic = false;
-let audioInitialized = false;
-
-document.addEventListener("click", function() {
-    if (!audioInitialized) {
-        startBackgroundMusic();
-        audioInitialized = true;
-    }
-}, { once: true });
-
-function initAudio() {
-    if (!audioCtx) {
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    }
-}
-
-function startBackgroundMusic() {
-    initAudio();
-    if (!audioCtx) return;
-    if (isPlayingMusic) return;
-    isPlayingMusic = true;
-    
-    const melody = [
-        { freq: 261.63, duration: 250 },
-        { freq: 329.63, duration: 250 },
-        { freq: 392.00, duration: 250 },
-        { freq: 523.25, duration: 750 },
-        { freq: 440.00, duration: 250 },
-        { freq: 392.00, duration: 1000 },
-        { freq: 0,      duration: 500 },
-        { freq: 261.63, duration: 250 },
-        { freq: 329.63, duration: 250 },
-        { freq: 392.00, duration: 250 },
-        { freq: 523.25, duration: 750 },
-        { freq: 440.00, duration: 250 },
-        { freq: 392.00, duration: 1000 },
-        { freq: 0,      duration: 1000 }
-    ];
-    musicIndex = 0;
-    
-    if (bgMusicInterval) {
-        clearTimeout(bgMusicInterval);
-    }
-    
-    function playNextNote() {
-        if (!audioCtx || !isPlayingMusic) return;
-        try {
-            const note = melody[musicIndex];
-            if (note.freq > 0) {
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-                osc.type = "triangle";
-                osc.frequency.setValueAtTime(note.freq, audioCtx.currentTime);
-                gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + (note.duration / 1000) - 0.05);
-                osc.connect(gain);
-                gain.connect(audioCtx.destination);
-                osc.start();
-                osc.stop(audioCtx.currentTime + (note.duration / 1000));
-            }
-            musicIndex = (musicIndex + 1) % melody.length;
-            bgMusicInterval = setTimeout(playNextNote, note.duration);
-        } catch (e) {}
-    }
-    playNextNote();
-}
-
-function stopBackgroundMusic() {
-    isPlayingMusic = false;
-    if (bgMusicInterval) {
-        clearTimeout(bgMusicInterval);
-        bgMusicInterval = null;
-    }
-}
-
-function playClick() {
-    try {
-        initAudio();
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        osc.type = "square";
-        osc.frequency.setValueAtTime(800, audioCtx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(300, audioCtx.currentTime + .04);
-        gain.gain.setValueAtTime(.2, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(.01, audioCtx.currentTime + .04);
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-        osc.start();
-        osc.stop(audioCtx.currentTime + .04);
-    } catch(e) {}
-}
 
 const targetDate = new Date("2026-09-01T12:00:00-03:00").getTime();
 
@@ -266,7 +173,6 @@ function buyPsoo() {
         return;
     }
     videoUsed = true;
-    stopBackgroundMusic();
     openVideo("PsooUnboxing.mp4", "C:\\VIDEOS\\PsooUnboxing.avi");
 }
 
@@ -278,8 +184,10 @@ function openVideo(source, filename) {
     videoScreen.style.display = "flex";
     video.load();
     setTimeout(function() {
-        video.play().catch(function() {});
-    }, 500);
+        video.play().catch(function(error) {
+            console.log("Autoplay error:", error);
+        });
+    }, 300);
 }
 
 function toggleVideo() {
@@ -303,8 +211,6 @@ video.addEventListener("ended", function() {
     btn.disabled = true;
     document.getElementById("buyIcon").style.background = "#808080";
     document.getElementById("buyText").textContent = "OUT OF STOCK";
-    
-    startBackgroundMusic();
 });
 
 const stockImages = ["PenguinDoug.png", "DoctorMender.png", "BoPeep.png", "TeddyCop.png"];
