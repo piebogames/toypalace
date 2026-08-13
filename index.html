@@ -1,286 +1,77 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Toy Palace - Welcome!</title>
-<style>
-* { box-sizing: border-box; }
-html, body { margin: 0; padding: 0; min-height: 100%; }
-body { background: #008080; font-family: "MS Sans Serif", Tahoma, Arial, sans-serif; color: #000; }
-.retro-container { width: 100%; margin: 20px auto; background: #c0c0c0; border-top: 2px solid #fff; border-left: 2px solid #fff; border-right: 2px solid #0a0a0a; border-bottom: 2px solid #0a0a0a; padding: 2px; position: relative; }
-.mode-computer { max-width: 850px; }
-.inner-border { border-top: 2px solid #dfdfdf; border-left: 2px solid #dfdfdf; border-right: 2px solid #808080; border-bottom: 2px solid #808080; padding: 15px; }
-header { background: #000080; color: #fff; padding: 15px 10px; text-align: center; border-top: 2px solid #808080; border-left: 2px solid #808080; border-right: 2px solid #fff; border-bottom: 2px solid #fff; margin-bottom: 10px; position: relative; }
-.logo { font-size: 1.8rem; font-weight: bold; color: #ffff00; text-decoration: none; font-family: "Impact", sans-serif; letter-spacing: 2px; text-shadow: 2px 2px #000; }
-.countdown-box { background: #000; color: #00ff00; border: 2px inset #fff; padding: 8px; text-align: center; font-size: .75rem; margin-bottom: 15px; }
-.countdown-label { color: #fff; font-size: .65rem; margin-bottom: 4px; font-weight: bold; font-family: "Courier New", monospace; }
-#countdown { font-family: "Courier New", monospace; font-weight: bold; font-size: 1.1rem; }
-.marquee-bar { background: #fff; border: 2px inset #dfdfdf; padding: 4px; margin-bottom: 10px; font-size: .8rem; color: #000080; font-weight: bold; }
-nav { background: #c0c0c0; padding: 5px; border-top: 1px solid #fff; border-left: 1px solid #fff; border-right: 1px solid #808080; border-bottom: 1px solid #808080; margin-bottom: 15px; }
-.nav-links { display: flex; gap: 15px; }
-.nav-links a { color: #000; text-decoration: none; font-size: .85rem; padding: 2px 5px; }
-.nav-links a:hover { background: #000080; color: #fff; }
-.hero-banner { background: #000; color: #fff; padding: 15px; text-align: center; border: 2px inset #fff; margin-bottom: 20px; }
-.hero-banner h2 { margin: 0 0 15px; font-size: 1.3rem; color: #ff0000; font-family: "Courier New", monospace; text-shadow: 1px 1px #fff; }
-.stock-viewer { width: 100%; height: 150px; background: url('https://www.transparenttextures.com/patterns/stardust.png') #222; border: 2px inset #808080; display: flex; align-items: center; justify-content: center; overflow: hidden; margin-bottom: 10px; }
-.stock-image { max-width: 90%; max-height: 130px; object-fit: contain; image-rendering: pixelated; display: block; }
-.stock-image.fade { animation: imageFade .55s ease; }
-@keyframes imageFade { 0% { opacity: 0; transform: scale(.90); } 100% { opacity: 1; transform: scale(1); } }
-.product-grid { display: grid; grid-template-columns: 1fr; gap: 15px; max-width: 450px; margin: 0 auto; }
-.product-card { background: #c0c0c0; border-top: 2px solid #fff; border-left: 2px solid #fff; border-right: 2px solid #000; border-bottom: 2px solid #000; padding: 4px; text-align: center; display: flex; flex-direction: column; }
-.product-image-container { width: 100%; height: 240px; background: #fff; border: 2px inset #808080; overflow: hidden; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; }
-.product-retro-img { max-width: 100%; max-height: 100%; object-fit: contain; image-rendering: pixelated; }
-.product-info { display: flex; flex-direction: column; flex-grow: 1; padding: 5px; background: #fff; border: 2px inset #808080; margin-bottom: 10px; }
-.product-name { font-size: 1.1rem; color: #000080; font-weight: bold; margin-bottom: 5px; font-family: "Courier New", monospace; }
-.product-price { color: #008000; font-weight: bold; margin-bottom: 10px; font-size: 1.2rem; }
-.product-status { background: #ffffcc; border: 1px dashed #808080; padding: 8px; font-size: .8rem; line-height: 1.6; text-align: left; }
-.product-status strong { color: #000; }
-.stock { color: #ff0000; font-weight: bold; }
-.state { color: #000080; font-weight: bold; }
-.btn-buy { background: #c0c0c0; color: #000; border-top: 2px solid #fff; border-left: 2px solid #fff; border-right: 2px solid #000; border-bottom: 2px solid #000; padding: 10px; font-family: "MS Sans Serif", Tahoma, sans-serif; font-weight: bold; font-size: 1rem; width: 100%; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 10px; }
-.btn-buy:active { border-top: 2px solid #000; border-left: 2px solid #000; border-right: 2px solid #fff; border-bottom: 2px solid #fff; padding: 11px 9px 9px 11px; }
-.btn-buy:disabled { color: #808080; cursor: default; text-shadow: 1px 1px #fff; border-top: 2px solid #fff; border-left: 2px solid #fff; border-right: 2px solid #000; border-bottom: 2px solid #000; padding: 10px; }
-footer { margin-top: 20px; background: #c0c0c0; text-align: center; padding: 10px; font-size: .8rem; border-top: 1px solid #fff; border-left: 1px solid #fff; border-right: 1px solid #808080; border-bottom: 1px solid #808080; display: flex; justify-content: space-between; align-items: center; }
-.counter { font-family: "Courier New", monospace; background: #000; color: #ff0000; padding: 4px 8px; border: 2px inset #808080; letter-spacing: 2px; }
-#video-screen { display: none; position: fixed; inset: 0; background: url('https://www.transparenttextures.com/patterns/stardust.png') #008080; z-index: 10000; color: #000; font-family: "MS Sans Serif", sans-serif; flex-direction: column; align-items: center; justify-content: center; }
-.video-window { width: min(800px, 94vw); background: #c0c0c0; border-top: 2px solid #fff; border-left: 2px solid #fff; border-right: 2px solid #000; border-bottom: 2px solid #000; padding: 2px; }
-.video-titlebar { background: #000080; color: #fff; padding: 4px 6px; font-size: .9rem; font-weight: bold; display: flex; align-items: center; justify-content: space-between; margin-bottom: 2px; }
-.video-title { color: #fff; }
-.video-area { width: 100%; background: #000; aspect-ratio: 4 / 3; display: flex; align-items: center; justify-content: center; border: 2px inset #808080; }
-#main-video { width: 100%; height: 100%; object-fit: contain; display: block; }
-.video-controls { height: 45px; background: #c0c0c0; display: flex; align-items: center; gap: 8px; padding: 8px; }
-.video-control { min-width: 45px; height: 30px; background: #c0c0c0; color: #000; border-top: 2px solid #fff; border-left: 2px solid #fff; border-right: 2px solid #000; border-bottom: 2px solid #000; font-family: "MS Sans Serif", sans-serif; font-weight: bold; cursor: pointer; display: flex; justify-content: center; align-items: center; }
-.video-control:active { border-top: 2px solid #000; border-left: 2px solid #000; border-right: 2px solid #fff; border-bottom: 2px solid #fff; }
-.video-control.disabled { color: #808080; cursor: default; }
-.video-filename { margin-left: auto; color: #000; font-size: .8rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 45%; border: 1px inset #808080; padding: 3px 6px; background: #fff; }
-@media (max-width: 600px) {
-    .countdown-box { margin-bottom: 10px; }
-    .hero-banner p { font-size: .85rem; }
-}
-</style>
+    <title>Toy Palace - Offline</title>
 </head>
-<body>
+<body bgcolor="#C0C0C0" text="#000000">
 
-<div class="retro-container mode-computer" id="main-container">
-    <div class="inner-border">
-        <header>
-            <a href="#" class="logo">TOY PALACE</a>
-        </header>
+<center>
 
-        <nav>
-            <div class="nav-links">
-                <a href="#">File</a>
-                <a href="#">Edit</a>
-                <a href="#">View</a>
-                <a href="#">Favorites</a>
-                <a href="#">Help</a>
-            </div>
-        </nav>
+<br><br>
 
-        <div class="marquee-bar">
-            <marquee scrollamount="4">WELCOME! HERE, WE HELP YOU MAKE TRUE FRIENDS. KEEP AN EYE OUT FOR SPECIAL OFFERS!</marquee>
-        </div>
+<table width="700" border="2" cellpadding="15" cellspacing="0" bgcolor="#FFFFFF">
+<tr>
+<td>
 
-        <div class="countdown-box">
-            <div class="countdown-label">SYSTEM SHUTDOWN SEQUENCE</div>
-            <div id="countdown">00d 00h 00m 00s</div>
-        </div>
+<center>
+<font face="Arial" size="6"><b>TOY PALACE</b></font>
+<br>
+<font face="Arial" size="2">The World's Toy Superstore</font>
+</center>
 
-        <div id="main-content">
-            <section class="hero-banner">
-                <h2>!!! OUT OF STOCK WARNING !!!</h2>
+<hr>
 
-                <div class="stock-viewer">
-                    <img id="stockImage" class="stock-image" src="PenguinDoug.png" alt="Missing Toy">
-                </div>
+<br>
 
-                <p>We apologize, but our limited inventory has been completely depleted due to high demand. Manufacturing will resume shortly.</p>
-            </section>
+<center>
+<font face="Times New Roman" size="5">
+<b>TOY PALACE IS CURRENTLY OFFLINE</b>
+</font>
 
-            <main class="showcase">
-                <div class="product-grid">
-                    <div class="product-card">
-                        <div class="product-image-container">
-                            <img src="PsooPlushie.png" alt="Psoo Plushie" class="product-retro-img">
-                        </div>
+<br><br>
 
-                        <div class="product-info">
-                            <div class="product-name">Psoo Plushie (1998 Ed.)</div>
-                            <div class="product-price">$20.00 USD</div>
+<font face="Courier New" size="3">
+Something went wrong :-[
+</font>
 
-                            <div class="product-status">
-                                <div><strong>Inventory:</strong> <span class="stock" id="stockCount">1 Unit Remaining</span></div>
-                                <div><strong>System Status:</strong> <span class="state" id="systemStatus">Abandoned / Lost</span></div>
-                                <div><strong>Condition:</strong> Mint In Box (MIB)</div>
-                            </div>
-                        </div>
+<br><br>
 
-                        <button id="buyBtn" class="btn-buy" onclick="buyPsoo()">
-                            <img id="buyIcon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" width="16" height="16" style="background:#008000">
-                            <span id="buyText">Add to Cart</span>
-                        </button>
-                    </div>
-                </div>
-            </main>
-        </div>
+<font face="Times New Roman" size="3">
+We are sorry, but Toy Palace is no longer available.
+<br>
+This website will not be returning.
+</font>
 
-        <footer>
-            <span>&copy; 1998-2002 Toy Palace Inc.</span>
-            <div class="counter">001254</div>
-        </footer>
-    </div>
-</div>
+<br><br>
 
-<div id="video-screen">
-    <div class="video-window">
-        <div class="video-titlebar">
-            <span class="video-title" id="video-title">Media Player</span>
-        </div>
+<font face="Arial" size="2">
+Thank you for visiting Toy Palace.
+</font>
 
-        <div class="video-area">
-            <video id="main-video" preload="metadata" playsinline></video>
-        </div>
+<br><br><br>
 
-        <div class="video-controls">
-            <button class="video-control" onclick="playVideo()">&#9658;</button>
-            <button class="video-control disabled" disabled>&#10074;&#10074;</button>
-            <button class="video-control disabled" disabled>&#9632;</button>
-            <span class="video-filename" id="video-filename">Loading...</span>
-        </div>
-    </div>
-</div>
+<font face="Courier New" size="2">
+------------------------------------<br>
+TOY PALACE SYSTEM MESSAGE<br>
+STATUS: OFFLINE<br>
+------------------------------------
+</font>
 
-<script>
-document.addEventListener("contextmenu", function(event) {
-    event.preventDefault();
-});
+</center>
 
-document.addEventListener("keydown", function(event) {
-    if (
-        event.key === "F12" ||
-        (event.ctrlKey && event.shiftKey && ["I", "J", "C", "K"].includes(event.key.toUpperCase())) ||
-        (event.ctrlKey && event.key.toUpperCase() === "U")
-    ) {
-        event.preventDefault();
-    }
-});
+<br><br>
 
-const targetDate = new Date("2026-09-01T12:00:00-03:00").getTime();
+<hr>
 
-function updateCountdown() {
-    const now = Date.now();
-    let difference = targetDate - now;
+<font face="Arial" size="1">
+Toy Palace © 1998-2002
+</font>
 
-    if (difference < 0) {
-        difference = 0;
-    }
+</td>
+</tr>
+</table>
 
-    const totalSeconds = Math.floor(difference / 1000);
-    const days = Math.floor(totalSeconds / 86400);
-    const hours = Math.floor((totalSeconds % 86400) / 3600);
-    const minutes = Math.floor((totalSeconds % 3600) / 60);
-    const seconds = totalSeconds % 60;
-
-    document.getElementById("countdown").textContent =
-        String(days).padStart(2, "0") + "d " +
-        String(hours).padStart(2, "0") + "h " +
-        String(minutes).padStart(2, "0") + "m " +
-        String(seconds).padStart(2, "0") + "s";
-}
-
-updateCountdown();
-setInterval(updateCountdown, 1000);
-
-let videoUsed = false;
-
-const videoScreen = document.getElementById("video-screen");
-const video = document.getElementById("main-video");
-const videoTitle = document.getElementById("video-title");
-const videoFilename = document.getElementById("video-filename");
-
-function buyPsoo() {
-    if (videoUsed) {
-        return;
-    }
-
-    videoUsed = true;
-
-    openVideo("./PsooUnboxing.mp4", "C:\\VIDEOS\\PsooUnboxing.avi");
-}
-
-function openVideo(source, filename) {
-    video.pause();
-    video.removeAttribute("src");
-    video.load();
-
-    videoTitle.textContent = "Windows Media Player";
-    videoFilename.textContent = filename;
-
-    videoScreen.style.display = "flex";
-
-    video.src = source;
-    video.load();
-}
-
-function playVideo() {
-    if (!video.src) {
-        video.src = "./PsooUnboxing.mp4";
-        video.load();
-    }
-
-    video.play().catch(function(error) {
-        console.log("Video playback error:", error);
-    });
-}
-
-video.addEventListener("error", function() {
-    console.log("Video could not be loaded:", video.error);
-});
-
-video.addEventListener("ended", function() {
-    video.pause();
-    video.removeAttribute("src");
-    video.load();
-
-    videoScreen.style.display = "none";
-
-    document.getElementById("stockCount").textContent = "0 Units (OUT OF STOCK)";
-    document.getElementById("systemStatus").textContent = "Unavailable";
-
-    const btn = document.getElementById("buyBtn");
-
-    btn.disabled = true;
-
-    document.getElementById("buyIcon").style.background = "#808080";
-    document.getElementById("buyText").textContent = "OUT OF STOCK";
-});
-
-const stockImages = [
-    "PenguinDoug.png",
-    "DoctorMender.png",
-    "BoPeep.png",
-    "TeddyCop.png"
-];
-
-let stockIndex = 0;
-
-const stockImage = document.getElementById("stockImage");
-
-setInterval(function() {
-    stockIndex++;
-
-    if (stockIndex >= stockImages.length) {
-        stockIndex = 0;
-    }
-
-    stockImage.classList.remove("fade");
-    void stockImage.offsetWidth;
-
-    stockImage.src = stockImages[stockIndex];
-    stockImage.classList.add("fade");
-}, 2500);
-</script>
+</center>
 
 </body>
 </html>
